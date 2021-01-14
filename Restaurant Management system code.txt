@@ -1,0 +1,440 @@
+package project;
+
+import java.util.Date;
+import java.util.Scanner;
+
+import javax.swing.event.ChangeEvent;
+
+import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
+import javafx.geometry.Pos;
+import javafx.scene.Node;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DatePicker;
+import javafx.scene.control.Label;
+import javafx.scene.control.Labeled;
+import javafx.scene.control.PasswordField;
+import javafx.scene.control.Spinner;
+import javafx.scene.control.TextField;
+import javafx.scene.effect.DropShadow;
+import javafx.scene.effect.InnerShadow;
+import javafx.scene.effect.Reflection;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
+import javafx.scene.layout.BackgroundImage;
+import javafx.scene.layout.BackgroundPosition;
+import javafx.scene.layout.BackgroundRepeat;
+import javafx.scene.layout.BackgroundSize;
+import javafx.scene.layout.GridPane;
+import javafx.scene.paint.Color;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+
+public class Main {
+	
+	// Class of first page
+	public static class Frontp extends Application {
+		//Declare id and password instance 
+		String Admin = "Maryam";
+		String Pass = "123456";
+		String checkAdmin, checkPass;
+		
+		//Object of second page in page for calling secondpage
+		Secondpage sp=new Secondpage(); 
+		public static void main(String[] args) {
+			// TODO Auto-generated method stub
+	launch(args);
+		}
+
+		@Override
+		public void start(Stage Stage1) throws Exception {
+			// TODO Auto-generated method stub
+			
+			//Setting of firstpage  + styling
+			GridPane pane=new GridPane();
+			Scene scene = new Scene(pane,900,700);
+			Stage1.setScene(scene);
+			Stage1.show();
+			
+			Stage1.setTitle("PROJECT");
+			Label  heading1= new Label("BURGR CLUB");
+			heading1.setFont(Font.font ("broadway", 50));
+			heading1.setAlignment(Pos.TOP_LEFT);
+			heading1.setTextFill(Color.CORAL);
+			pane.setHgap(10);
+			pane.setVgap(10);
+			pane.add(heading1, 2,8 );
+			
+			//Background settings
+			Image image=new Image("file:C:\\Users\\Maryam\\Desktop\\Resturaunt management system\\Hamburger_Buns_French_fries_Chili_pepper_558301_3840x2400.jpg");
+			BackgroundImage backgroundImage = new BackgroundImage(image, BackgroundRepeat.NO_REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.CENTER, null);
+			Background background = new Background(backgroundImage);
+			pane.setBackground(background);
+			
+			//Label setting 
+	        Label adminid = new Label("Admin ID");
+	        adminid.setFont(Font.font ("broadway", 20));
+	        adminid.setAlignment(Pos.CENTER_LEFT);
+	        adminid.setTextFill(Color.CORAL);
+	        pane.add(adminid, 1, 22);
+	        Label password = new Label("Password");
+	        password.setFont(Font.font ("broadway", 20));
+	        password.setAlignment(Pos.CENTER_LEFT);
+	        password.setTextFill(Color.CORAL);
+	        pane.add(password, 1, 23);
+	        
+	        //Textfield settings
+	        final TextField txt = new TextField();	        
+	        txt.setPromptText("Enter your ID");	   
+	        txt.setAlignment(Pos.CENTER_LEFT);
+	        pane.add(txt, 2, 22);	        	       
+	        final PasswordField pas = new PasswordField();
+	        pas.setPromptText("Enter Password");
+	        pas.setAlignment(Pos.CENTER_LEFT);
+	        pane.add(pas, 2, 23);
+	        
+	        //login Button settings
+	    	Button btn=new Button("Login");	       
+	        final Label lblMsg = new Label();
+	        btn.setAlignment(Pos.CENTER);
+	        pane.add(btn, 2, 24);
+	        pane.add(lblMsg, 2, 25);	       	
+			
+	        //Function of login button
+	       	btn.setOnAction(new EventHandler<ActionEvent>() {
+
+				@Override
+				public void handle(ActionEvent arg0) {
+					// TODO Auto-generated method stub
+					checkAdmin = txt.getText().toString();
+	        		checkPass = pas.getText().toString();
+	        		if(checkAdmin.equalsIgnoreCase(Admin)&& checkPass.equals(Pass)){
+	        			lblMsg.setText("Congratulations!");
+	        			lblMsg.setTextFill(Color.GREEN);
+	        			       			
+	        			try
+	        			{
+							sp.start(Stage1);
+						} catch (Exception e) 
+	        			{							
+							e.printStackTrace();
+						}	                      
+	        		}
+	        		else{
+	        			lblMsg.setText("Incorrect user or password");
+	        			lblMsg.setTextFill(Color.RED);
+	        		}	
+	        		
+	        		}
+				});
+	       	
+	       	
+		}
+		}
+}
+
+//Class of second page 
+class Secondpage extends Application
+{
+	// declaration of variables as static for subtotal
+	static int a=0,b=0,c=0,d=0,e=0;
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+launch(args);
+
+	}
+	
+	//for calling page 2 and page3
+	protected Stage Stage3;
+	protected Stage Stage2;
+	@Override
+	public void start(Stage Stage2) throws Exception {
+		// TODO Auto-generated method stub
+		
+		//Setting of secondpage  + styling
+		GridPane pane=new GridPane();
+		Scene scene = new Scene(pane,800,600);
+		Stage2.setScene(scene);
+		Stage2.setTitle("MAIN PAGE");
+		Label  heading1= new Label("   BURGER CLUB");		
+		heading1.setFont(Font.font ("broadway", 15));
+		heading1.setTextFill(Color.CORAL);
+		pane.setHgap(5);
+		pane.setVgap(5);
+		pane.add(heading1, 0, 2);
+		
+		//Heading settings
+		Label  heading2= new Label("   MAIN MENU");		
+		heading2.setFont(Font.font ("broadway", 15));		
+		heading2.setTextFill(Color.CORAL);
+		pane.add(heading2, 0, 3);
+		
+		//Background settings
+		BackgroundFill background = new BackgroundFill(Color.BLACK,null,null);
+        Background back = new Background(background);
+        pane.setBackground(back);
+		         
+        //Date settings//Setting of firstpage  + styling
+        Date date=new Date();        
+        DatePicker dp=new DatePicker();
+        dp.setPromptText("Date");
+        pane.add(dp, 4,4);       
+              
+        //Settings of LAbels of food item along with their PRICES
+        Label b1=new Label(" ITEMS\t \t           PRICES \nBeef Burger\t           Rs.250");
+        pane.add(b1, 1,5);
+        b1.setTextFill(Color.WHITE);
+
+        Label b2=new Label("Chicken Burger\t   Rs.100");
+        pane.add(b2, 1, 6);
+        b2.setTextFill(Color.WHITE);
+        
+        Label b3=new Label("Bacon Burger\t           Rs.350");
+        pane.add(b3, 1, 7);
+        b3.setTextFill(Color.WHITE);
+        
+        Label b4=new Label("Umami Burger\t           Rs.550");
+        pane.add(b4, 1, 8);
+        b4.setTextFill(Color.WHITE);
+        
+        Label b5=new Label("Minetta Burger\t   Rs.350");
+        pane.add(b5, 1, 9);
+        b5.setTextFill(Color.WHITE);
+        
+        //Textfields for subtotal
+         TextField st1 = new TextField();
+        st1.setPromptText("SubTotal");
+        st1.setPrefWidth(0);
+        pane.add(st1, 4,5);
+               
+        TextField st2= new TextField();
+        st2.setPromptText("SubTotal");
+        st2.setPrefWidth(0);
+        pane.add(st2, 4,6);
+        
+        TextField st3= new TextField();
+        st3.setPromptText("SubTotal");
+        st3.setPrefWidth(0);
+        pane.add(st3, 4,7);
+        
+        TextField st4= new TextField();
+        st4.setPromptText("SubTotal");
+        st4.setPrefWidth(0);
+        pane.add(st4, 4,8);
+        
+        TextField st5= new TextField();
+        st5.setPromptText("SubTotal");
+        st5.setPrefWidth(0);
+        pane.add(st5, 4,9);
+        
+        //Spinners for quantity input
+        Spinner<Integer> spinner1 = new Spinner<>(0, 100, 0);
+        pane.add(spinner1, 2,5);
+        Spinner<Integer> spinner2 = new Spinner<>(0, 100, 0);
+         pane.add(spinner2,2,6);
+         Spinner<Integer> spinner3 = new Spinner<>(0, 100, 0);
+         pane.add(spinner3,2,7);
+         Spinner<Integer> spinner4 = new Spinner<>(0, 100, 0);
+         pane.add(spinner4,2,8);
+         Spinner<Integer> spinner5 = new Spinner<>(0, 100, 0);
+         pane.add(spinner5,2,9);
+         spinner1.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>() {
+
+			@Override
+			public void handle(Event event) {
+				//System.out.println(getValue.spinner1);
+				pane.add(new TextField("Rs/="+a), 4,5);
+				pane.add(new TextField("Rs/"+spinner1.getValue()*250), 4, 5);
+			}
+		});
+         
+         spinner2.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>() {
+
+ 			@Override
+ 			public void handle(Event event) {
+ 				pane.add(new TextField("Rs/="+b), 4,6);
+ 				pane.add(new TextField("Rs/"+spinner2.getValue()*100), 4, 6);
+ 			}
+ 		});
+         
+         spinner3.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>() {
+
+  			@Override
+  			public void handle(Event event) {
+  				pane.add(new TextField("Rs/="+c), 4,7);
+  				pane.add(new TextField("Rs/"+spinner3.getValue()*350), 4, 7);
+  			}
+  		});
+         
+         spinner4.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>() {
+
+   			@Override
+   			public void handle(Event event) {
+   				pane.add(new TextField("Rs/="+c), 4,8);
+   				pane.add(new TextField("Rs/"+spinner4.getValue()*550), 4, 8);
+   			}
+   		});
+         
+         
+         spinner5.addEventHandler(MouseEvent.MOUSE_CLICKED, new EventHandler<Event>() {
+
+   			@Override
+   			public void handle(Event event) {
+   				pane.add(new TextField("Rs/="+c), 4,9);
+   				pane.add(new TextField("Rs/"+spinner5.getValue()*350), 4, 9);
+   			}
+   		});
+        //Textfield of Total
+        final TextField t = new TextField();
+        t.setPromptText("Total");
+        t.setPrefWidth(0);
+        pane.add(t, 2,11);
+      
+        //Setting of Place order button
+      Button Place = new Button("Place Order");
+    		  pane.add(Place,3,11);     
+    		 
+    		  //Function of place order button
+      Place.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>() {
+   			@Override
+   			public void handle(MouseEvent event) {
+   			 a=spinner1.getValue()*250;
+   			 b=spinner2.getValue()*100;
+   			 c=spinner3.getValue()*350;
+   			 d=spinner4.getValue()*550;
+   			 e=spinner5.getValue()*350;
+   			pane.add(new TextField("Rs/="+a*2), 4,5);
+   			pane.add(new TextField("Rs/="+b), 4,6);
+   			pane.add(new TextField("Rs/="+c), 4,7);
+   			pane.add(new TextField("Rs/="+d), 4,8);
+   			pane.add(new TextField("Rs/="+e), 4,9);
+   			
+   			pane.add(new TextField("Rs/="+(a+b+c+d+e)), 2,11);	
+   			}
+   			}); 
+      
+      //Settings of Generate bill button
+      Button bill = new Button("Generate Bill");
+	  pane.add(bill,4,11);   
+	  
+	  //Function of Generate bill button
+	  bill.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>() {
+
+		@Override
+		public void handle(MouseEvent event) {
+			// TODO Auto-generated method stub
+			Thirdpage tp=new Thirdpage();        			
+				try {
+					
+					tp.start(Stage2);
+				} catch (Exception e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				}
+			
+		}});
+	}	 	 
+	}
+
+//Class of Third page
+class Thirdpage extends Application
+{  
+	//Object for calling second page
+	Secondpage sp2=new Secondpage(); 
+	protected static final Stage Stage1 = null;
+
+	@Override
+	public void start(Stage Stage3) throws Exception {
+		// TODO Auto-generated method stub
+		
+		//Setting of Thirdpage  + styling
+		GridPane pane=new GridPane();
+        Scene scene = new Scene(pane,600,400);
+		Stage3.setScene(scene);
+		Stage3.setTitle("BILL");
+		Label  heading1= new Label("   BURGER CLUB");		
+		heading1.setFont(Font.font ("broadway", 15));
+		heading1.setTextFill(Color.CORAL);
+		pane.setHgap(5);
+		pane.setVgap(5);
+		pane.add(heading1, 0, 2);
+		Secondpage sp2=new Secondpage();
+		
+		//To print date
+		 Date date=new Date();
+		 Label b0=new Label("DATE:\n"+date);
+	        pane.add(b0, 1, 4);
+	        b0.setTextFill(Color.BLACK);
+	        
+		//Labels of items with their prices for print 
+		Label b1=new Label(" ITEMS\nBeef Burger\t                      Rs/="+sp2.a);
+        pane.add(b1, 1,6);
+        b1.setTextFill(Color.BLACK);
+        
+        Label b2=new Label("Chicken Burger\t              Rs/="+sp2.b);
+        pane.add(b2, 1, 7);
+        b2.setTextFill(Color.BLACK);
+        		 
+        Label b3=new Label("Bacon Burger \t                      Rs/="+sp2.c);
+        pane.add(b3, 1, 8);
+        b3.setTextFill(Color.BLACK);
+        
+        Label b4=new Label("Umami Burger\t                      Rs/="+sp2.d);
+        pane.add(b4, 1, 9);
+        b4.setTextFill(Color.BLACK);
+        
+        Label b5=new Label("Minetta Burger\t              Rs/="+sp2.e);
+        pane.add(b5, 1, 10);
+        b5.setTextFill(Color.BLACK);
+        
+        Label b6=new Label("____________________________________________");
+        pane.add(b6, 1, 11);
+        b6.setTextFill(Color.BLACK);
+        
+        double total=0;
+        total=sp2.a+sp2.b+sp2.c+sp2.d+sp2.e;
+        Label b7=new Label("Total\t                              Rs/="+total);
+        pane.add(b7, 1, 12);
+        b7.setTextFill(Color.BLACK);
+		
+       //Settings of sign out button
+		 Button sgout = new Button("Sign out");
+	      pane.add(sgout,1,14);
+	      
+	      //Function of sign out button
+	      sgout.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>() {
+	 			@Override
+	 			public void handle(MouseEvent event) {
+	 				Stage3.close(); 	
+	 			}
+	 			});   
+	      
+	      //Settings of new bill button which on click open previous page
+			 Button nb = new Button("New Bill");
+		      pane.add(nb,2,14);
+		      
+		      //Function of new bill button
+		      nb.addEventHandler(MouseEvent.MOUSE_CLICKED,new EventHandler<MouseEvent>() {
+		 			@Override
+		 			public void handle(MouseEvent event) {
+		 				
+		 				
+                        try {
+                        	sp2.start(Stage3);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
+		 			}
+		      });   
+	}
+	}
+//THE END
